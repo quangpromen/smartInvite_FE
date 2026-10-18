@@ -87,3 +87,70 @@ export function formatRsvpStatus(status: string): { label: string; tagClass: str
       return { label: status, tagClass: 'tag gray' };
   }
 }
+
+export function formatEventType(type: string): string {
+  switch (type) {
+    case 'GRADUATION':
+      return 'Lễ tốt nghiệp';
+    case 'BIRTHDAY':
+      return 'Sinh nhật';
+    case 'WEDDING':
+      return 'Tiệc cưới';
+    case 'WORKSHOP':
+      return 'Hội thảo';
+    case 'ANNIVERSARY':
+      return 'Kỷ niệm';
+    case 'OTHER':
+    default:
+      return 'Sự kiện';
+  }
+}
+
+export function formatEventDateRange(startsAt: string, endsAt?: string | null): string {
+  try {
+    const start = new Date(startsAt);
+    if (isNaN(start.getTime())) return startsAt;
+
+    const startDateStr = new Intl.DateTimeFormat('vi-VN', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(start);
+
+    const startTimeStr = new Intl.DateTimeFormat('vi-VN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(start);
+
+    if (!endsAt) {
+      return `${startDateStr} lúc ${startTimeStr}`;
+    }
+
+    const end = new Date(endsAt);
+    if (isNaN(end.getTime())) {
+      return `${startDateStr} lúc ${startTimeStr}`;
+    }
+
+    const endDateStr = new Intl.DateTimeFormat('vi-VN', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    }).format(end);
+
+    const endTimeStr = new Intl.DateTimeFormat('vi-VN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(end);
+
+    // If on same date
+    if (startDateStr === endDateStr) {
+      return `${startDateStr} • ${startTimeStr} - ${endTimeStr}`;
+    }
+
+    return `${startDateStr}, ${startTimeStr} - ${endDateStr}, ${endTimeStr}`;
+  } catch {
+    return startsAt;
+  }
+}

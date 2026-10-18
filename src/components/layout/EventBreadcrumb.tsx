@@ -8,25 +8,39 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-export function EventBreadcrumb({ items }: { items: BreadcrumbItem[] }) {
+export function EventBreadcrumb({
+  items,
+  rootLabel = 'Tổng quan',
+  rootHref = '/dashboard',
+}: {
+  items: BreadcrumbItem[];
+  rootLabel?: string;
+  rootHref?: string;
+}) {
   return (
     <nav aria-label="Đường dẫn điều hướng" className="breadcrumbs">
-      <Link href="/dashboard" style={{ color: 'var(--muted)', fontWeight: 600 }}>
-        Dashboard
+      <Link href={rootHref} style={{ color: '#475569', fontWeight: 600 }}>
+        {rootLabel}
       </Link>
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
           <React.Fragment key={index}>
-            <span aria-hidden="true" style={{ color: '#cbd5e1' }}>
+            <span aria-hidden="true" style={{ color: '#94a3b8' }}>
               /
             </span>
             {isLast || !item.href ? (
-              <span aria-current={isLast ? 'page' : undefined} style={{ color: isLast ? 'var(--ink)' : 'var(--muted)', fontWeight: isLast ? 700 : 500 }}>
+              <span
+                aria-current={isLast ? 'page' : undefined}
+                style={{
+                  color: isLast ? 'var(--navy)' : '#475569',
+                  fontWeight: isLast ? 700 : 500,
+                }}
+              >
                 {item.label}
               </span>
             ) : (
-              <Link href={item.href} style={{ color: 'var(--muted)', fontWeight: 500 }}>
+              <Link href={item.href} style={{ color: '#475569', fontWeight: 500 }}>
                 {item.label}
               </Link>
             )}

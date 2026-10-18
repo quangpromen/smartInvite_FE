@@ -23,7 +23,7 @@ export default function EventWorkspaceLayout({ children }: { children: React.Rea
         <div style={{ fontSize: '48px', marginBottom: '16px' }} aria-hidden="true">
           ⚠️
         </div>
-        <h2 style={{ font: '400 28px Georgia, serif', color: 'var(--navy)', margin: '0 0 10px' }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '28px', fontWeight: 600, color: 'var(--navy)', margin: '0 0 10px' }}>
           Sự kiện không tồn tại
         </h2>
         <p style={{ color: '#64748b', fontSize: '14px', maxWidth: '440px', margin: '0 auto 24px', lineHeight: 1.6 }}>
@@ -102,7 +102,10 @@ export default function EventWorkspaceLayout({ children }: { children: React.Rea
 
           <h1
             style={{
-              font: '400 clamp(24px, 3vw, 34px) / 1.2 Georgia, serif',
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(24px, 3vw, 34px)',
+              fontWeight: 600,
+              lineHeight: 1.2,
               letterSpacing: '-0.5px',
               margin: '0 0 10px',
               color: '#ffffff',

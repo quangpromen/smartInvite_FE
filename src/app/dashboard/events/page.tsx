@@ -4,8 +4,11 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useMockStore } from '@/mocks/mock-store';
 import { EventCard } from '@/components/events/EventCard';
+import { EventToolbar } from '@/components/events/EventToolbar';
+import { EventListSkeleton } from '@/components/events/EventCardSkeleton';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { EventBreadcrumb } from '@/components/layout/EventBreadcrumb';
+import { PlusIcon, SearchIcon, EmptyBoxIcon } from '@/components/ui/Icons';
 
 export default function EventsIndexPage() {
   const { db } = useMockStore();
@@ -13,112 +16,101 @@ export default function EventsIndexPage() {
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
 
   const filteredEvents = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
     return db.events.filter((ev) => {
       const matchSearch =
-        ev.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ev.locationName.toLowerCase().includes(searchTerm.toLowerCase());
+        !term ||
+        ev.title.toLowerCase().includes(term) ||
+        ev.locationName.toLowerCase().includes(term) ||
+        (ev.locationAddress && ev.locationAddress.toLowerCase().includes(term));
       const matchStatus = statusFilter === 'ALL' || ev.status === statusFilter;
       return matchSearch && matchStatus;
     });
   }, [db.events, searchTerm, statusFilter]);
 
+  const handleResetFilters = () => {
+    setSearchTerm('');
+    setStatusFilter('ALL');
+  };
+
+  const hasActiveFilter = searchTerm.trim().length > 0 || statusFilter !== 'ALL';
+
   return (
-    <div>
-      <div style={{ marginBottom: '16px' }}>
+    <div className="events-page-container">
+      {/* Breadcrumb Navigation */}
+      <div className="events-breadcrumb-wrapper">
         <EventBreadcrumb items={[{ label: 'Sự kiện' }]} />
       </div>
 
-      <div className="page-heading">
-        <div>
+      {/* Page Heading & Header Actions */}
+      <header className="page-heading events-page-header">
+        <div className="events-header-text">
           <span className="eyebrow">QUẢN LÝ SỰ KIỆN</span>
           <h1>Danh sách sự kiện</h1>
-          <p>Mỗi sự kiện có thể chứa nhiều mẫu thiệp và danh sách khách mời riêng biệt.</p>
+          <p>
+            Quản lý và tổ chức các sự kiện của bạn. Mỗi sự kiện sở hữu danh sách khách mời và nhiều mẫu thiệp riêng biệt.
+          </p>
         </div>
-        <div className="actions">
-          <Link href="/dashboard/events/new" className="btn dark">
-            <span>➕</span>
+        <div className="actions events-header-actions">
+          <Link
+            href="/dashboard/events/new"
+            className="btn dark event-create-btn"
+            aria-label="Tạo sự kiện mới"
+          >
+            <PlusIcon size={16} />
             <span>Tạo sự kiện mới</span>
           </Link>
         </div>
+      </header>
+
+      {/* Screen reader live region for filter updates */}
+      <div role="status" aria-live="polite" className="sr-only">
+        Hiển thị {filteredEvents.length} trên tổng số {db.events.length} sự kiện
       </div>
 
-      {/* Filter and Search Bar */}
-      <div
-        className="panel"
-        style={{
-          padding: '16px 20px',
-          marginBottom: '24px',
-          display: 'flex',
-          gap: '14px',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '260px', alignItems: 'center' }}>
-          <div className="search" style={{ flex: 1, maxWidth: '360px' }}>
-            <span>🔍</span>
-            <input
-              type="search"
-              placeholder="Tìm theo tên sự kiện hoặc địa điểm..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              aria-label="Tìm kiếm sự kiện"
-            />
+      {/* Search and Filtering Toolbar */}
+      <EventToolbar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
+        filteredCount={filteredEvents.length}
+        totalCount={db.events.length}
+        onResetFilters={handleResetFilters}
+      />
+
+      {/* Events List or Empty States */}
+      <main id="events-list-section" aria-label="Danh sách sự kiện đã lọc">
+        {filteredEvents.length > 0 ? (
+          <div className="events-grid">
+            {filteredEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
           </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <label htmlFor="filter-status" className="sr-only">
-              Lọc theo trạng thái
-            </label>
-            <select
-              id="filter-status"
-              className="select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="ALL">Tất cả trạng thái</option>
-              <option value="PUBLISHED">Đã công bố</option>
-              <option value="DRAFT">Bản nháp</option>
-              <option value="FINISHED">Đã kết thúc</option>
-              <option value="CANCELLED">Đã hủy</option>
-            </select>
-          </div>
-        </div>
-
-        <div style={{ fontSize: '13px', color: '#64748b' }}>
-          Hiển thị <strong>{filteredEvents.length}</strong> / {db.events.length} sự kiện
-        </div>
-      </div>
-
-      {/* Events List or Empty State */}
-      {filteredEvents.length > 0 ? (
-        <div style={{ display: 'grid', gap: '16px' }}>
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
-      ) : (
-        <EmptyState
-          icon="📅"
-          title={searchTerm || statusFilter !== 'ALL' ? 'Không tìm thấy sự kiện phù hợp' : 'Bạn chưa có sự kiện nào'}
-          description={
-            searchTerm || statusFilter !== 'ALL'
-              ? 'Thử thay đổi từ khóa tìm kiếm hoặc bỏ bộ lọc trạng thái để xem lại toàn bộ sự kiện.'
-              : 'Hãy bắt đầu bằng cách tạo sự kiện đầu tiên của bạn để thiết kế thiệp và quản lý khách mời.'
-          }
-          actionText={searchTerm || statusFilter !== 'ALL' ? 'Xóa bộ lọc tìm kiếm' : 'Tạo sự kiện đầu tiên'}
-          onActionClick={
-            searchTerm || statusFilter !== 'ALL'
-              ? () => {
-                  setSearchTerm('');
-                  setStatusFilter('ALL');
-                }
-              : undefined
-          }
-          actionHref={searchTerm || statusFilter !== 'ALL' ? undefined : '/dashboard/events/new'}
-        />
-      )}
+        ) : db.events.length === 0 ? (
+          /* Empty state: No events created yet */
+          <EmptyState
+            icon={<EmptyBoxIcon size={32} />}
+            title="Bạn chưa có sự kiện nào"
+            description="Hãy bắt đầu bằng cách tạo sự kiện đầu tiên của bạn để thiết kế thiệp và quản lý khách mời."
+            actionText="Tạo sự kiện đầu tiên"
+            actionHref="/dashboard/events/new"
+          />
+        ) : (
+          /* Empty state: No results match search/filter */
+          <EmptyState
+            icon={<SearchIcon size={30} />}
+            title="Không tìm thấy sự kiện phù hợp"
+            description={
+              searchTerm.trim()
+                ? `Không có sự kiện nào khớp với từ khóa "${searchTerm}" hoặc bộ lọc trạng thái đã chọn.`
+                : 'Không có sự kiện nào thuộc trạng thái này.'
+            }
+            actionText="Xóa bộ lọc tìm kiếm"
+            onActionClick={handleResetFilters}
+          />
+        )}
+      </main>
     </div>
   );
 }

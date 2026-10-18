@@ -186,7 +186,9 @@ export function CardTile({ card, onDuplicateToOtherEvent }: CardTileProps) {
         <div>
           <h4
             style={{
-              font: '400 20px Georgia, serif',
+              fontFamily: 'var(--font-serif)',
+              fontSize: '20px',
+              fontWeight: 600,
               margin: '8px 0 4px',
               letterSpacing: '-0.3px',
             }}
