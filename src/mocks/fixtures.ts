@@ -68,9 +68,9 @@ export const initialEvents: Event[] = [
     startsAt: '2026-11-20T08:00:00+07:00',
     endsAt: '2026-11-20T11:30:00+07:00',
     timezone: 'Asia/Ho_Chi_Minh',
-    locationName: 'Hội trường Lớn A5 • ĐH Bách Khoa TP.HCM',
-    locationAddress: '268 Lý Thường Kiệt, Phường 14, Quận 10, TP. Hồ Chí Minh',
-    mapUrl: 'https://maps.google.com/?q=268+Ly+Thuong+Kiet+Quan+10+HCM',
+    locationName: 'Đại học FPT',
+    locationAddress: 'Khu Công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội',
+    mapUrl: 'https://maps.google.com/?q=Dai+hoc+FPT+Hoa+Lac',
     rsvpDeadline: '2026-11-15T23:59:00+07:00',
     status: 'PUBLISHED',
     attendanceOptionsEnabled: true,
@@ -161,6 +161,28 @@ const sampleClassicConfig: CardConfig = {
   envelopeStyle: 'ivory',
 };
 
+/** Approved visual: docs/ui-reference/fpt-invitation-approved.png */
+const sampleCampusConfig: CardConfig = {
+  theme: 'campus',
+  primaryColor: '#111a2b',
+  accentColor: '#e9571c',
+  brandLabel: 'ĐẠI HỌC FPT',
+  kicker: 'TRÂN TRỌNG KÍNH MỜI',
+  headline: 'LỄ TỐT NGHIỆP 2026',
+  headlineAccent: '2026',
+  subHeadline: 'Quang Nguyễn',
+  invitationCopy: 'Một hành trình tại FPT khép lại, một chương mới chính thức bắt đầu.',
+  signature: 'Quang Nguyễn & Gia đình',
+  mapLabel: 'Xem chỉ đường',
+  rsvpHeading: 'BẠN SẼ THAM DỰ CHỨ?',
+  rsvpYesLabel: 'Tôi sẽ tham dự',
+  rsvpNoLabel: 'Rất tiếc, tôi không thể',
+  closingLine: 'Hẹn gặp bạn tại ngày đặc biệt này.',
+  heroImageUrl: '/assets/campus/fpt-campus-hero.jpg',
+  heroImageAlt: 'Toàn cảnh khuôn viên Đại học FPT lúc hoàng hôn',
+  envelopeStyle: 'ivory',
+};
+
 const sampleRoseConfig: CardConfig = {
   theme: 'rose',
   primaryColor: '#744858',
@@ -221,9 +243,9 @@ export const initialCardDesigns: CardDesign[] = [
     audienceLabel: 'Gia đình & Người thân',
     status: 'PUBLISHED',
     isDefault: true, // Only 1 default for E1!
-    templateKey: 'classic',
-    publishedConfig: { ...sampleClassicConfig },
-    draftConfig: { ...sampleClassicConfig },
+    templateKey: 'campus',
+    publishedConfig: { ...sampleCampusConfig },
+    draftConfig: { ...sampleCampusConfig },
     revision: 1,
     createdAt: '2026-10-02T11:00:00Z',
     updatedAt: '2026-10-02T11:00:00Z',

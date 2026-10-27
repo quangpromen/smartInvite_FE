@@ -62,6 +62,25 @@ export default function GuestInvitationPage() {
     ? `${guest.personalization.salutation} ${guest.fullName}`
     : guest.fullName;
 
+  const isCampus = card.publishedConfig?.theme === 'campus';
+  const isEventClosed = event.status === 'CANCELLED' || event.status === 'FINISHED';
+  const campusRsvpDisabledReason = isDeadlinePassed
+    ? 'Đã quá hạn xác nhận tham dự.'
+    : isEventClosed
+    ? 'Sự kiện đã đóng phản hồi.'
+    : checkIn && rsvp?.status === 'YES'
+    ? 'Bạn đã check-in nên không thể đổi phản hồi.'
+    : undefined;
+
+  const handleCampusSelect = (status: 'YES' | 'NO') => {
+    if (campusRsvpDisabledReason) return;
+    handleRsvpSubmit({
+      status,
+      plusOnes: status === 'YES' ? rsvp?.plusOnes ?? 0 : 0,
+      attendanceMode: event.attendanceOptionsEnabled ? rsvp?.attendanceMode ?? 'BOTH' : undefined,
+    });
+  };
+
   // 3. Stage 1: Envelope presentation
   if (!isOpened) {
     return (
@@ -239,20 +258,33 @@ export default function GuestInvitationPage() {
               mode="PUBLIC_GUEST"
               guestPersonalization={guest.personalization}
               guestFullName={guest.fullName}
+              rsvp={
+                isCampus
+                  ? {
+                      status: rsvp?.status === 'YES' || rsvp?.status === 'NO' ? rsvp.status : null,
+                      disabled: !!campusRsvpDisabledReason,
+                      disabledReason: campusRsvpDisabledReason,
+                      onSelect: handleCampusSelect,
+                    }
+                  : undefined
+              }
             />
           </div>
 
-          {/* Interactive RSVP Mock Form */}
-          <RsvpForm
-            guest={guest}
-            event={event}
-            invitationId={invitation.id}
-            token={tokenParam}
-            existingRsvp={rsvp}
-            checkIn={checkIn}
-            isDeadlinePassed={isDeadlinePassed}
-            onSubmitRsvp={handleRsvpSubmit}
-          />
+          {/* Interactive RSVP Mock Form (campus theme embeds RSVP in card; form only shows QR pass after YES) */}
+          {(!isCampus || rsvp?.status === 'YES') && (
+            <RsvpForm
+              key={isCampus ? `${rsvp?.status ?? 'none'}` : 'rsvp'}
+              guest={guest}
+              event={event}
+              invitationId={invitation.id}
+              token={tokenParam}
+              existingRsvp={rsvp}
+              checkIn={checkIn}
+              isDeadlinePassed={isDeadlinePassed}
+              onSubmitRsvp={handleRsvpSubmit}
+            />
+          )}
         </section>
       </main>
 

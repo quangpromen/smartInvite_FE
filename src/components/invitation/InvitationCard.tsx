@@ -5,7 +5,7 @@ import type { CardDesign, CardConfig } from '@/features/cards/types';
 import type { Event } from '@/features/events/types';
 import type { EventGuest, GuestPersonalization } from '@/features/guests/types';
 import { formatDateOnly, formatTimeOnly } from '@/lib/format-date';
-
+import { CampusInvitationCard, type CampusRsvpControl } from './CampusInvitationCard';
 export type CardRenderMode = 'PUBLIC_GUEST' | 'HOST_PREVIEW' | 'EDITOR_PREVIEW';
 
 export interface InvitationCardProps {
@@ -16,6 +16,8 @@ export interface InvitationCardProps {
   guestPersonalization?: GuestPersonalization;
   guestFullName?: string;
   className?: string;
+  /** Campus theme: live RSVP wiring (public guest page). */
+  rsvp?: CampusRsvpControl;
 }
 
 export function InvitationCard({
@@ -26,6 +28,7 @@ export function InvitationCard({
   guestPersonalization,
   guestFullName,
   className = '',
+  rsvp,
 }: InvitationCardProps) {
   const activePersonalization = guestPersonalization || guest?.personalization;
   const activeFullName = guestFullName || guest?.fullName;
@@ -78,6 +81,25 @@ export function InvitationCard({
       ? `Kính gửi ${salutation} ${activeFullName}`
       : `Thân gửi ${activeFullName}`
     : null;
+
+  if (config.theme === 'campus') {
+    const campusRecipient =
+      greeting ||
+      (activeFullName
+        ? `Kính gửi ${salutation ? `${salutation} ` : ''}${activeFullName}`
+        : null);
+    return (
+      <CampusInvitationCard
+        config={config}
+        event={event}
+        recipientLabel={campusRecipient}
+        personalMessage={personalMessage}
+        accentColor={customAccent}
+        rsvp={rsvp}
+        className={className}
+      />
+    );
+  }
 
   const dateStr = formatDateOnly(event.startsAt);
   const timeStr = formatTimeOnly(event.startsAt);

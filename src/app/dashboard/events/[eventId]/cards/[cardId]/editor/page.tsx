@@ -241,13 +241,13 @@ export default function CardEditorPage() {
         className="editor-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'minmax(260px, 300px) 1fr minmax(260px, 300px)',
-          gap: '16px',
+          gridTemplateColumns: 'minmax(220px, 250px) minmax(420px, 1fr) minmax(280px, 320px)',
+          gap: '12px',
           alignItems: 'start',
         }}
       >
         {/* PANEL 1: Tools & Sections Navigator */}
-        <div className="panel" style={{ padding: '16px' }}>
+        <div className="panel editor-tools-panel" style={{ padding: '16px' }}>
           <h3
             style={{
               margin: '0 0 12px',
@@ -322,7 +322,7 @@ export default function CardEditorPage() {
 
         {/* PANEL 2: Live Interactive Canvas / Preview */}
         <div
-          className="panel"
+          className="panel editor-preview-panel"
           style={{
             padding: '20px',
             display: 'flex',
@@ -420,7 +420,7 @@ export default function CardEditorPage() {
               card={previewCard}
               event={event}
               guest={selectedGuest}
-              mode="HOST_PREVIEW"
+              mode="EDITOR_PREVIEW"
             />
           </div>
 
@@ -442,7 +442,7 @@ export default function CardEditorPage() {
         </div>
 
         {/* PANEL 3: Properties Inspector Panel */}
-        <div className="panel" style={{ padding: '20px' }}>
+        <div className="panel editor-inspector-panel" style={{ padding: '20px' }}>
           <h3
             style={{
               margin: '0 0 14px',
@@ -503,6 +503,44 @@ export default function CardEditorPage() {
                   placeholder="VD: Ban Tổ Chức, Thân ái..."
                 />
               </div>
+
+              {draft.theme === 'campus' && (
+                <fieldset
+                  style={{ border: '1px solid #e2e8f0', borderRadius: '10px', padding: '12px', display: 'grid', gap: '12px', margin: 0 }}
+                >
+                  <legend style={{ fontSize: '12px', fontWeight: 700, color: '#475569', padding: '0 6px' }}>
+                    Thẻ Campus — văn bản hiển thị
+                  </legend>
+                  {(
+                    [
+                      ['brandLabel', 'Thương hiệu / trường', 'VD: ĐẠI HỌC FPT'],
+                      ['kicker', 'Dòng mở đầu', 'VD: TRÂN TRỌNG KÍNH MỜI'],
+                      ['headlineAccent', 'Phần nhấn màu trong tiêu đề', 'VD: 2026 (phải nằm trong tiêu đề)'],
+                      ['heroImageUrl', 'Đường dẫn ảnh campus', '/assets/campus/fpt-campus-hero.jpg'],
+                      ['heroImageAlt', 'Mô tả ảnh (alt)', 'Mô tả ngắn cho người dùng máy đọc màn hình'],
+                      ['mapLabel', 'Nhãn nút bản đồ', 'Xem chỉ đường'],
+                      ['rsvpHeading', 'Tiêu đề RSVP', 'BẠN SẼ THAM DỰ CHỨ?'],
+                      ['rsvpYesLabel', 'Nhãn nút “Sẽ tham dự”', 'Tôi sẽ tham dự'],
+                      ['rsvpNoLabel', 'Nhãn nút “Không thể”', 'Rất tiếc, tôi không thể'],
+                      ['closingLine', 'Lời kết dưới RSVP', 'Hẹn gặp bạn tại ngày đặc biệt này.'],
+                    ] as const
+                  ).map(([field, label, placeholder]) => (
+                    <div className="form-block" key={field}>
+                      <label htmlFor={`editor-${field}`}>{label}</label>
+                      <input
+                        id={`editor-${field}`}
+                        type="text"
+                        value={draft[field] ?? ''}
+                        onChange={(e) => updateDraftField(field, e.target.value)}
+                        placeholder={placeholder}
+                      />
+                    </div>
+                  ))}
+                  <small style={{ color: '#64748b', fontSize: '11px' }}>
+                    Ngày giờ, địa điểm và bản đồ lấy từ Sự kiện; lời chào “Kính gửi …” lấy từ Khách mời. Phụ đề ở trên là dòng tên nổi bật (ví dụ tên tân cử nhân).
+                  </small>
+                </fieldset>
+              )}
             </div>
           )}
 
@@ -518,6 +556,7 @@ export default function CardEditorPage() {
                 { key: 'rose', name: 'Rose Pastel', color: '#e11d48', bg: '#fff1ef' },
                 { key: 'night', name: 'Midnight Navy', color: '#38bdf8', bg: '#0f172a' },
                 { key: 'modern', name: 'Modern Clean', color: '#2563eb', bg: '#0284c7' },
+                { key: 'campus', name: 'Campus Sunrise (FPT)', color: '#e9571c', bg: '#fdf3e6' },
               ].map((th) => {
                 const isSelected = draft.theme === th.key;
                 return (

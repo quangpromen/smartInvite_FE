@@ -55,6 +55,13 @@ export default function NewCardInEventPage() {
       previewBg: 'linear-gradient(135deg, #0f172a, #0284c7)',
       textColor: '#ffffff',
     },
+    {
+      key: 'campus',
+      name: 'Campus Sunrise',
+      desc: 'Ảnh khuôn viên trường làm hero, tông cam & navy, có RSVP ngay trên thiệp. Phù hợp lễ tốt nghiệp tại trường.',
+      previewBg: 'linear-gradient(135deg, #fdf3e6, #f6c9ab)',
+      textColor: '#111a2b',
+    },
   ];
 
   const validate = () => {

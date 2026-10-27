@@ -125,11 +125,27 @@ export class MockCardRepository implements ICardRepository {
     const isDefault = input.isDefault ?? isFirstCard;
 
     const now = new Date().toISOString();
+    const themeKeys = ['classic', 'rose', 'night', 'minimal', 'modern', 'campus'] as const;
+    const theme = (themeKeys as readonly string[]).includes(input.templateKey)
+      ? (input.templateKey as (typeof themeKeys)[number])
+      : ('classic' as const);
+    const campusDefaults =
+      theme === 'campus'
+        ? {
+            headline: event.title.toUpperCase(),
+            subHeadline: '',
+            invitationCopy: event.description || 'Một hành trình khép lại, một chương mới chính thức bắt đầu.',
+            heroImageUrl: '/assets/campus/fpt-campus-hero.jpg',
+            showCapArt: false,
+            showFlowerArt: false,
+          }
+        : {};
     const initialConfig = {
-      theme: 'classic' as const,
+      theme,
       headline: 'THƯ MỜI THAM DỰ',
       invitationCopy: 'Trân trọng kính mời quý vị và các bạn đến chung vui cùng chúng tôi.',
       signature: 'Ban Tổ Chức',
+      ...campusDefaults,
       ...input.initialConfig,
     };
 

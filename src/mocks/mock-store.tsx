@@ -13,7 +13,7 @@ import {
 import type { User } from '@/features/invitations/types';
 import type { MockNotification } from '@/features/users/types';
 
-const STORAGE_KEY = 'smartinvite.ui.v2';
+const STORAGE_KEY = 'smartinvite.ui.v3';
 const USER_KEY = 'smartinvite.current_user.v2';
 
 export interface ToastState {

@@ -1,6 +1,6 @@
 export type CardStatus = 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
 
-export type CardThemeKey = 'classic' | 'rose' | 'night' | 'minimal' | 'modern';
+export type CardThemeKey = 'classic' | 'rose' | 'night' | 'minimal' | 'modern' | 'campus';
 
 export interface CardConfig {
   theme: CardThemeKey;
@@ -13,6 +13,17 @@ export interface CardConfig {
   showCapArt?: boolean;
   showFlowerArt?: boolean;
   envelopeStyle?: 'ivory' | 'navy' | 'burgundy';
+  /** Campus theme only — every string below is editable in Card Editor. */
+  brandLabel?: string; // e.g. "ĐẠI HỌC FPT"
+  kicker?: string; // e.g. "TRÂN TRỌNG KÍNH MỜI"
+  headlineAccent?: string; // highlighted part of headline, e.g. "2026"
+  heroImageUrl?: string; // campus asset path
+  heroImageAlt?: string;
+  mapLabel?: string; // e.g. "Xem chỉ đường"
+  rsvpHeading?: string; // e.g. "BẠN SẼ THAM DỰ CHỨ?"
+  rsvpYesLabel?: string;
+  rsvpNoLabel?: string;
+  closingLine?: string; // e.g. "Hẹn gặp bạn tại ngày đặc biệt này."
 }
 
 export interface CardDesign {
