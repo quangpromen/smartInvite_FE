@@ -13,7 +13,7 @@ import {
 import type { User } from '@/features/invitations/types';
 import type { MockNotification } from '@/features/users/types';
 
-const STORAGE_KEY = 'smartinvite.ui.v3';
+const STORAGE_KEY = 'smartinvite.ui.v4';
 const USER_KEY = 'smartinvite.current_user.v2';
 
 export interface ToastState {
@@ -50,11 +50,16 @@ function loadInitialState(): MockDb {
   }
 
   try {
+    // Purge outdated localStorage keys
+    localStorage.removeItem('smartinvite.ui.v1');
+    localStorage.removeItem('smartinvite.ui.v2');
+    localStorage.removeItem('smartinvite.ui.v3');
+
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return createInitialMockDb();
 
     const parsed = JSON.parse(raw);
-    // Validate that it has the normalized v2 shape
+    // Validate that it has the normalized shape and no outdated mock events
     if (
       parsed &&
       Array.isArray(parsed.events) &&
@@ -64,11 +69,19 @@ function loadInitialState(): MockDb {
       Array.isArray(parsed.rsvpResponses) &&
       Array.isArray(parsed.checkIns)
     ) {
+      // If persisted data has old removed events, reset to clean focused db
+      const hasObsoleteEvents = parsed.events.some((e: { id: string }) => e.id !== 'event-e1');
+      if (hasObsoleteEvents) {
+        const fresh = createInitialMockDb();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+        return fresh;
+      }
+
       // Ensure notifications exists
       if (!Array.isArray(parsed.notifications)) {
         parsed.notifications = [...initialNotifications];
       }
-      // Ensure all initial users are present
+      // Ensure users are present
       if (!Array.isArray(parsed.users) || parsed.users.length < initialUsers.length) {
         parsed.users = [...initialUsers];
       }

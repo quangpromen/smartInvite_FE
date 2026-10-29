@@ -9,8 +9,8 @@ import type { MockNotification } from '@/features/users/types';
 export const initialUsers: User[] = [
   {
     id: 'user-host-1',
-    fullName: 'Nguyễn Minh Anh',
-    email: 'minhanh.grad@smartinvite.demo',
+    fullName: 'Quang Nguyễn',
+    email: 'quangnguyen.grad@smartinvite.demo',
     role: 'HOST',
     status: 'ACTIVE',
     joinedAt: '2026-09-15T08:00:00Z',
@@ -18,37 +18,8 @@ export const initialUsers: User[] = [
     bio: 'Chủ sự kiện Lễ Tốt Nghiệp 2026',
   },
   {
-    id: 'user-host-2',
-    fullName: 'Trần Hoàng Long',
-    email: 'hoanglong.events@smartinvite.demo',
-    role: 'HOST',
-    status: 'ACTIVE',
-    joinedAt: '2026-10-01T10:00:00Z',
-    lastActiveAt: '2026-10-16T18:15:00Z',
-    bio: 'Người tổ chức sự kiện Workshop Công nghệ',
-  },
-  {
-    id: 'user-host-3',
-    fullName: 'Lê Phương Thảo',
-    email: 'phuongthao.wed@smartinvite.demo',
-    role: 'HOST',
-    status: 'SUSPENDED',
-    joinedAt: '2026-08-20T14:00:00Z',
-    lastActiveAt: '2026-09-30T11:00:00Z',
-    bio: 'Tài khoản tạm ngưng do vi phạm quy chế',
-  },
-  {
-    id: 'user-host-4',
-    fullName: 'Phạm Quốc Bảo',
-    email: 'quocbao.invited@smartinvite.demo',
-    role: 'HOST',
-    status: 'INVITED',
-    joinedAt: '2026-10-15T09:00:00Z',
-    bio: 'Đang chờ kích hoạt tài khoản',
-  },
-  {
     id: 'user-admin-1',
-    fullName: 'Quản trị viên Demo',
+    fullName: 'Quản trị viên Hệ thống',
     email: 'admin@smartinvite.demo',
     role: 'ADMIN',
     status: 'ACTIVE',
@@ -77,89 +48,7 @@ export const initialEvents: Event[] = [
     createdAt: '2026-10-01T10:00:00Z',
     updatedAt: '2026-10-15T15:30:00Z',
   },
-  {
-    id: 'event-e2',
-    ownerId: 'user-host-1',
-    title: 'Workshop Khởi Nghiệp Công Nghệ AI 2026',
-    eventType: 'WORKSHOP',
-    description: 'Gặp gỡ và chia sẻ kinh nghiệm ứng dụng AI trong xây dựng sản phẩm khởi nghiệp.',
-    startsAt: '2026-12-05T14:00:00+07:00',
-    endsAt: '2026-12-05T17:30:00+07:00',
-    timezone: 'Asia/Ho_Chi_Minh',
-    locationName: 'Trung tâm Đổi mới Sáng tạo Quốc gia',
-    locationAddress: 'Ngõ 7 Tôn Thất Thuyết, Cầu Giấy, Hà Nội',
-    mapUrl: 'https://maps.google.com/?q=Ton+That+Thuyet+Cau+Giay+Ha+Noi',
-    rsvpDeadline: '2026-12-01T18:00:00+07:00',
-    status: 'DRAFT',
-    attendanceOptionsEnabled: false,
-    createdAt: '2026-10-10T09:00:00Z',
-    updatedAt: '2026-10-10T09:00:00Z',
-  },
-  {
-    id: 'event-e3',
-    ownerId: 'user-host-1',
-    title: 'Gặp Mặt Thường Niên Cựu Sinh Viên (Đã hủy)',
-    eventType: 'ANNIVERSARY',
-    description: 'Sự kiện mẫu thử nghiệm kiểm tra trạng thái sự kiện bị hủy.',
-    startsAt: '2026-11-28T18:00:00+07:00',
-    endsAt: '2026-11-28T21:00:00+07:00',
-    timezone: 'Asia/Ho_Chi_Minh',
-    locationName: 'Nhà hàng Lam Điền Plaza',
-    locationAddress: '12 Nguyễn Trãi, Quận 1, TP. Hồ Chí Minh',
-    rsvpDeadline: '2026-11-25T18:00:00+07:00',
-    status: 'CANCELLED',
-    attendanceOptionsEnabled: false,
-    createdAt: '2026-10-12T08:00:00Z',
-    updatedAt: '2026-10-14T10:00:00Z',
-  },
-  {
-    id: 'event-e4',
-    ownerId: 'user-host-1',
-    title: 'Ngày Hội Tuyển Dụng & Hướng Nghiệp',
-    eventType: 'OTHER',
-    description: 'Sự kiện mẫu thử nghiệm kiểm tra mẫu thiệp bản nháp.',
-    startsAt: '2026-12-15T08:30:00+07:00',
-    endsAt: '2026-12-15T16:30:00+07:00',
-    timezone: 'Asia/Ho_Chi_Minh',
-    locationName: 'Nhà thi đấu Quân khu 7',
-    locationAddress: '202 Hoàng Văn Thụ, Phường 9, Phú Nhuận, TP.HCM',
-    rsvpDeadline: '2026-12-10T18:00:00+07:00',
-    status: 'PUBLISHED',
-    attendanceOptionsEnabled: false,
-    createdAt: '2026-10-13T08:00:00Z',
-    updatedAt: '2026-10-13T08:00:00Z',
-  },
-  {
-    id: 'event-e5',
-    ownerId: 'user-host-1',
-    title: 'Lễ Trao Giải Đổi Mới Sáng Tạo',
-    eventType: 'WORKSHOP',
-    description: 'Sự kiện mẫu thử nghiệm kiểm tra liên kết mời bị thu hồi.',
-    startsAt: '2026-12-20T19:00:00+07:00',
-    endsAt: '2026-12-20T21:30:00+07:00',
-    timezone: 'Asia/Ho_Chi_Minh',
-    locationName: 'Khách sạn Rex Sài Gòn',
-    locationAddress: '141 Nguyễn Huệ, Bến Nghé, Quận 1, TP.HCM',
-    rsvpDeadline: '2026-12-18T18:00:00+07:00',
-    status: 'PUBLISHED',
-    attendanceOptionsEnabled: false,
-    createdAt: '2026-10-14T08:00:00Z',
-    updatedAt: '2026-10-14T08:00:00Z',
-  },
 ];
-
-const sampleClassicConfig: CardConfig = {
-  theme: 'classic',
-  primaryColor: '#17243c',
-  accentColor: '#b18f61',
-  headline: 'THƯ MỜI LỄ TỐT NGHIỆP',
-  subHeadline: 'Trân trọng kính mời',
-  invitationCopy: 'Trân trọng kính mời quý vị và các bạn đến chung vui cùng gia đình chúng tôi tại buổi lễ tốt nghiệp đại học.',
-  signature: 'Nguyễn Minh Anh & Gia đình',
-  showCapArt: true,
-  showFlowerArt: true,
-  envelopeStyle: 'ivory',
-};
 
 /** Approved visual: docs/ui-reference/fpt-invitation-approved.png */
 const sampleCampusConfig: CardConfig = {
@@ -183,66 +72,14 @@ const sampleCampusConfig: CardConfig = {
   envelopeStyle: 'ivory',
 };
 
-const sampleRoseConfig: CardConfig = {
-  theme: 'rose',
-  primaryColor: '#744858',
-  accentColor: '#c48291',
-  headline: 'GRADUATION CELEBRATION',
-  subHeadline: 'The Next Chapter Begins',
-  invitationCopy: 'Cùng mình đánh dấu ngày tốt nghiệp với thật nhiều nụ cười và kỷ niệm đáng nhớ nhé!',
-  signature: 'Minh Anh',
-  showCapArt: true,
-  showFlowerArt: false,
-  envelopeStyle: 'burgundy',
-};
-
-const sampleNightConfig: CardConfig = {
-  theme: 'night',
-  primaryColor: '#1e293b',
-  accentColor: '#d5b78d',
-  headline: 'KÍNH MỜI THẦY CÔ',
-  subHeadline: 'Tri ân người dẫn đường',
-  invitationCopy: 'Em xin được bày tỏ lòng biết ơn chân thành nhất đến quý Thầy Cô đã tận tình dìu dắt trong suốt những năm tháng giảng đường.',
-  signature: 'Học trò Nguyễn Minh Anh',
-  showCapArt: true,
-  showFlowerArt: true,
-  envelopeStyle: 'navy',
-};
-
-const sampleWorkshopConfig: CardConfig = {
-  theme: 'modern',
-  primaryColor: '#0f172a',
-  accentColor: '#38bdf8',
-  headline: 'THƯ MỜI THAM DỰ WORKSHOP',
-  subHeadline: 'Trân trọng kính mời Quý đại biểu',
-  invitationCopy: 'Tham gia buổi tọa đàm chuyên sâu về công nghệ và giải pháp AI trong tương lai.',
-  signature: 'Ban Tổ Chức',
-  showCapArt: false,
-  showFlowerArt: false,
-  envelopeStyle: 'navy',
-};
-
-const sampleGenericConfig: CardConfig = {
-  theme: 'minimal',
-  primaryColor: '#334155',
-  accentColor: '#94a3b8',
-  headline: 'GIẤY MỜI THAM DỰ',
-  subHeadline: 'Trân trọng kính mời',
-  invitationCopy: 'Trân trọng kính mời tham dự sự kiện.',
-  signature: 'Ban Tổ Chức',
-  showCapArt: false,
-  showFlowerArt: false,
-  envelopeStyle: 'ivory',
-};
-
 export const initialCardDesigns: CardDesign[] = [
   {
     id: 'card-e1-a',
     eventId: 'event-e1',
-    title: 'Thiệp Gia Đình & Người Thân',
-    audienceLabel: 'Gia đình & Người thân',
+    title: 'Thiệp Mời Lễ Tốt Nghiệp 2026',
+    audienceLabel: 'Khách mời & Người thân',
     status: 'PUBLISHED',
-    isDefault: true, // Only 1 default for E1!
+    isDefault: true,
     templateKey: 'campus',
     publishedConfig: { ...sampleCampusConfig },
     draftConfig: { ...sampleCampusConfig },
@@ -250,109 +87,21 @@ export const initialCardDesigns: CardDesign[] = [
     createdAt: '2026-10-02T11:00:00Z',
     updatedAt: '2026-10-02T11:00:00Z',
   },
-  {
-    id: 'card-e1-b',
-    eventId: 'event-e1',
-    title: 'Thiệp Bạn Bè & Đồng Nghiệp',
-    audienceLabel: 'Bạn bè & Đồng nghiệp',
-    status: 'PUBLISHED',
-    isDefault: false,
-    templateKey: 'rose',
-    publishedConfig: { ...sampleRoseConfig },
-    draftConfig: { ...sampleRoseConfig },
-    revision: 1,
-    createdAt: '2026-10-03T14:20:00Z',
-    updatedAt: '2026-10-03T14:20:00Z',
-  },
-  {
-    id: 'card-e1-c',
-    eventId: 'event-e1',
-    title: 'Thiệp Thầy Cô (Dự thảo)',
-    audienceLabel: 'Thầy cô & Giảng viên',
-    status: 'DRAFT',
-    isDefault: false,
-    templateKey: 'night',
-    publishedConfig: null, // Draft only! Not published yet.
-    draftConfig: { ...sampleNightConfig },
-    revision: 1,
-    createdAt: '2026-10-04T09:15:00Z',
-    updatedAt: '2026-10-04T09:15:00Z',
-  },
-  {
-    id: 'card-e2-d',
-    eventId: 'event-e2',
-    title: 'Giấy Mời Đại Biểu',
-    audienceLabel: 'Diễn giả & Khách mời',
-    status: 'PUBLISHED',
-    isDefault: true,
-    templateKey: 'modern',
-    publishedConfig: { ...sampleWorkshopConfig },
-    draftConfig: { ...sampleWorkshopConfig },
-    revision: 1,
-    createdAt: '2026-10-10T10:00:00Z',
-    updatedAt: '2026-10-10T10:00:00Z',
-  },
-  // Card for E3 (cancelled event)
-  {
-    id: 'card-e3-e',
-    eventId: 'event-e3',
-    title: 'Thiệp Họp Mặt Cũ',
-    audienceLabel: 'Cựu sinh viên',
-    status: 'PUBLISHED',
-    isDefault: true,
-    templateKey: 'minimal',
-    publishedConfig: { ...sampleGenericConfig },
-    draftConfig: { ...sampleGenericConfig },
-    revision: 1,
-    createdAt: '2026-10-12T09:00:00Z',
-    updatedAt: '2026-10-12T09:00:00Z',
-  },
-  // Card for E4 (draft card test)
-  {
-    id: 'card-e4-draft',
-    eventId: 'event-e4',
-    title: 'Thiệp Mời Doanh Nghiệp (Bản nháp)',
-    audienceLabel: 'Nhà tuyển dụng',
-    status: 'DRAFT', // Draft status!
-    isDefault: true,
-    templateKey: 'minimal',
-    publishedConfig: null,
-    draftConfig: { ...sampleGenericConfig },
-    revision: 1,
-    createdAt: '2026-10-13T09:00:00Z',
-    updatedAt: '2026-10-13T09:00:00Z',
-  },
-  // Card for E5 (revoked test)
-  {
-    id: 'card-e5-a',
-    eventId: 'event-e5',
-    title: 'Giấy Mời Vinh Danh',
-    audienceLabel: 'Khách mời vinh danh',
-    status: 'PUBLISHED',
-    isDefault: true,
-    templateKey: 'classic',
-    publishedConfig: { ...sampleClassicConfig },
-    draftConfig: { ...sampleClassicConfig },
-    revision: 1,
-    createdAt: '2026-10-14T09:00:00Z',
-    updatedAt: '2026-10-14T09:00:00Z',
-  },
 ];
 
 export const initialGuests: EventGuest[] = [
-  // 10 guests strictly for Event E1 (maintains exact invariant tests and guest counts)
   {
     id: 'guest-1',
     eventId: 'event-e1',
     fullName: 'Nguyễn Minh An',
     groupName: 'Bạn đại học',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: {
       schemaVersion: 1,
       salutation: 'Bạn',
       greeting: 'Thân gửi Minh An',
       personalMessage: 'Nhớ đến sớm chụp ảnh kỷ niệm với mình nhé!',
-      accentColor: '#7069d6',
+      accentColor: '#e9571c',
     },
     plusOnesAllowed: 1,
     createdAt: '2026-10-05T08:00:00Z',
@@ -363,13 +112,12 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Trần Gia Bình',
     groupName: 'Bạn thân',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: {
       schemaVersion: 1,
       salutation: 'Bạn',
       greeting: 'Gửi bạn hiền Gia Bình',
       personalMessage: 'Không gặp không về nhé người anh em!',
-      accentColor: '#b18f61',
     },
     plusOnesAllowed: 0,
     createdAt: '2026-10-05T08:05:00Z',
@@ -380,7 +128,7 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Lê Hoàng Phúc',
     groupName: 'Bạn đại học',
-    assignedCardDesignId: null, // Unassigned guest!
+    assignedCardDesignId: 'card-e1-a',
     personalization: { schemaVersion: 1 },
     plusOnesAllowed: 0,
     createdAt: '2026-10-05T08:10:00Z',
@@ -407,7 +155,7 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Võ Nhật Minh',
     groupName: 'Bạn cấp 3',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: { schemaVersion: 1 },
     plusOnesAllowed: 0,
     createdAt: '2026-10-05T08:20:00Z',
@@ -418,7 +166,7 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Đặng Ngọc Hà',
     groupName: 'Bạn đại học',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: { schemaVersion: 1 },
     plusOnesAllowed: 0,
     createdAt: '2026-10-05T08:25:00Z',
@@ -429,7 +177,7 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Bùi Đức Anh',
     groupName: 'Bạn cấp 3',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: { schemaVersion: 1 },
     plusOnesAllowed: 0,
     createdAt: '2026-10-05T08:30:00Z',
@@ -456,7 +204,7 @@ export const initialGuests: EventGuest[] = [
     eventId: 'event-e1',
     fullName: 'Trần Minh Châu',
     groupName: 'Bạn thân',
-    assignedCardDesignId: 'card-e1-b',
+    assignedCardDesignId: 'card-e1-a',
     personalization: { schemaVersion: 1 },
     plusOnesAllowed: 1,
     createdAt: '2026-10-05T08:40:00Z',
@@ -477,73 +225,9 @@ export const initialGuests: EventGuest[] = [
     createdAt: '2026-10-05T08:45:00Z',
     updatedAt: '2026-10-05T08:45:00Z',
   },
-  // Guests for Event E2 (includes duplicate name "Nguyễn Minh An" across events as independent record)
-  {
-    id: 'guest-e2-1',
-    eventId: 'event-e2',
-    fullName: 'TS. Nguyễn Văn Hùng',
-    groupName: 'Diễn giả',
-    assignedCardDesignId: 'card-e2-d',
-    personalization: {
-      schemaVersion: 1,
-      salutation: 'Tiến sĩ',
-      greeting: 'Kính gửi TS. Nguyễn Văn Hùng',
-    },
-    plusOnesAllowed: 0,
-    createdAt: '2026-10-11T09:00:00Z',
-    updatedAt: '2026-10-11T09:00:00Z',
-  },
-  {
-    id: 'guest-e2-2',
-    eventId: 'event-e2',
-    fullName: 'Nguyễn Minh An', // Same full name as guest-1 in E1, but independent record in E2!
-    groupName: 'Khách mời VIP',
-    assignedCardDesignId: 'card-e2-d',
-    personalization: { schemaVersion: 1 },
-    plusOnesAllowed: 1,
-    createdAt: '2026-10-11T09:10:00Z',
-    updatedAt: '2026-10-11T09:10:00Z',
-  },
-  // Guest for Cancelled Event E3
-  {
-    id: 'guest-cancelled',
-    eventId: 'event-e3',
-    fullName: 'Trần Văn Kiên',
-    groupName: 'Cựu sinh viên',
-    assignedCardDesignId: 'card-e3-e',
-    personalization: { schemaVersion: 1 },
-    plusOnesAllowed: 0,
-    createdAt: '2026-10-12T09:30:00Z',
-    updatedAt: '2026-10-12T09:30:00Z',
-  },
-  // Guest for Draft Card Event E4
-  {
-    id: 'guest-draft-card',
-    eventId: 'event-e4',
-    fullName: 'Lê Văn Thắng',
-    groupName: 'Doanh nghiệp',
-    assignedCardDesignId: 'card-e4-draft', // Assigned to DRAFT card!
-    personalization: { schemaVersion: 1 },
-    plusOnesAllowed: 0,
-    createdAt: '2026-10-13T09:30:00Z',
-    updatedAt: '2026-10-13T09:30:00Z',
-  },
-  // Guest for Revoked Invitation Event E5
-  {
-    id: 'guest-revoked',
-    eventId: 'event-e5',
-    fullName: 'Hoàng Văn Tuấn',
-    groupName: 'Khách mời',
-    assignedCardDesignId: 'card-e5-a',
-    personalization: { schemaVersion: 1 },
-    plusOnesAllowed: 0,
-    createdAt: '2026-10-14T09:30:00Z',
-    updatedAt: '2026-10-14T09:30:00Z',
-  },
 ];
 
 export const initialInvitations: Invitation[] = [
-  // E1 Invitations
   {
     id: 'inv-1',
     eventId: 'event-e1',
@@ -566,7 +250,17 @@ export const initialInvitations: Invitation[] = [
     createdAt: '2026-10-06T10:05:00Z',
     updatedAt: '2026-10-06T10:05:00Z',
   },
-  // guest-3 has NO invitation (NOT_CREATED)
+  {
+    id: 'inv-3',
+    eventId: 'event-e1',
+    guestId: 'guest-3',
+    token: 'demo-invite-phuc',
+    status: 'ACTIVE',
+    tokenHash: 'mock-hash-sha256-inv-3',
+    checkinVersion: 1,
+    createdAt: '2026-10-06T10:10:00Z',
+    updatedAt: '2026-10-06T10:10:00Z',
+  },
   {
     id: 'inv-4',
     eventId: 'event-e1',
@@ -644,68 +338,10 @@ export const initialInvitations: Invitation[] = [
     createdAt: '2026-10-06T10:45:00Z',
     updatedAt: '2026-10-06T10:45:00Z',
   },
-  // E2 invitations
-  {
-    id: 'inv-e2-1',
-    eventId: 'event-e2',
-    guestId: 'guest-e2-1',
-    token: 'demo-invite-hung-e2',
-    status: 'ACTIVE',
-    tokenHash: 'mock-hash-sha256-inv-e2-1',
-    checkinVersion: 1,
-    createdAt: '2026-10-11T09:30:00Z',
-    updatedAt: '2026-10-11T09:30:00Z',
-  },
-  {
-    id: 'inv-e2-2',
-    eventId: 'event-e2',
-    guestId: 'guest-e2-2',
-    token: 'demo-invite-an-e2',
-    status: 'ACTIVE',
-    tokenHash: 'mock-hash-sha256-inv-e2-2',
-    checkinVersion: 1,
-    createdAt: '2026-10-11T09:35:00Z',
-    updatedAt: '2026-10-11T09:35:00Z',
-  },
-  // E3 cancelled event invitation
-  {
-    id: 'inv-cancelled',
-    eventId: 'event-e3',
-    guestId: 'guest-cancelled',
-    token: 'demo-invite-cancelled-event',
-    status: 'ACTIVE',
-    tokenHash: 'mock-hash-sha256-cancelled',
-    checkinVersion: 1,
-    createdAt: '2026-10-12T10:00:00Z',
-    updatedAt: '2026-10-12T10:00:00Z',
-  },
-  // E4 draft card invitation
-  {
-    id: 'inv-draft',
-    eventId: 'event-e4',
-    guestId: 'guest-draft-card',
-    token: 'demo-invite-draft-card',
-    status: 'ACTIVE',
-    tokenHash: 'mock-hash-sha256-draft',
-    checkinVersion: 1,
-    createdAt: '2026-10-13T10:00:00Z',
-    updatedAt: '2026-10-13T10:00:00Z',
-  },
-  // E5 revoked invitation
-  {
-    id: 'inv-revoked',
-    eventId: 'event-e5',
-    guestId: 'guest-revoked',
-    token: 'demo-invite-revoked',
-    status: 'REVOKED',
-    tokenHash: 'mock-hash-sha256-revoked',
-    checkinVersion: 1,
-    createdAt: '2026-10-14T10:00:00Z',
-    updatedAt: '2026-10-14T10:00:00Z',
-  },
 ];
 
 // RSVP responses: PENDING is simply the absence of a row!
+// 6 YES, 2 NO, 2 PENDING (inv-3, inv-7) -> Total: 10 guests
 export const initialRsvpResponses: RsvpResponse[] = [
   {
     invitationId: 'inv-1',
@@ -721,7 +357,7 @@ export const initialRsvpResponses: RsvpResponse[] = [
     attendanceMode: 'CEREMONY',
     updatedAt: '2026-10-07T15:30:00Z',
   },
-  // inv-3 does not exist (guest-3 has no invitation -> PENDING)
+  // inv-3: no RSVP row -> PENDING!
   {
     invitationId: 'inv-4',
     status: 'YES',
@@ -763,20 +399,12 @@ export const initialRsvpResponses: RsvpResponse[] = [
     plusOnes: 0,
     updatedAt: '2026-10-09T14:30:00Z',
   },
-  // E2 RSVP
-  {
-    invitationId: 'inv-e2-1',
-    status: 'YES',
-    plusOnes: 0,
-    attendanceMode: 'CEREMONY',
-    updatedAt: '2026-10-12T09:00:00Z',
-  },
 ];
 
 export const initialCheckIns: CheckIn[] = [
   {
     invitationId: 'inv-1',
-    arrivedCount: 2, // Guest 1 + 1 plus-one
+    arrivedCount: 2,
     checkedInAt: '2026-11-20T08:15:00+07:00',
   },
 ];
@@ -785,7 +413,7 @@ export const initialNotifications: MockNotification[] = [
   {
     id: 'notif-1',
     title: 'Phản hồi RSVP mới',
-    message: 'Khách mời "Bác Nguyễn Văn An" đã xác nhận tham dự Lễ Tốt Nghiệp (2 người).',
+    message: 'Khách mời "Nguyễn Minh An" đã xác nhận tham dự Lễ Tốt Nghiệp (2 người).',
     type: 'success',
     timestamp: '2026-10-17T21:40:00Z',
     read: false,
@@ -802,19 +430,10 @@ export const initialNotifications: MockNotification[] = [
   },
   {
     id: 'notif-3',
-    title: 'Khách mời chưa gán thiệp',
-    message: 'Có khách mời trong sự kiện "Lễ Tốt Nghiệp" chưa được gán mẫu thiệp.',
-    type: 'warning',
-    timestamp: '2026-10-15T14:20:00Z',
-    read: true,
-    link: '/dashboard/events/event-e1/guests',
-  },
-  {
-    id: 'notif-4',
-    title: 'Cập nhật mẫu thiệp',
-    message: 'Mẫu thiệp "Thầy Cô & Giảng Viên" đã được xuất bản thành công.',
+    title: 'Mẫu thiệp đã sẵn sàng',
+    message: 'Mẫu thiệp "Lễ Tốt Nghiệp 2026" đã xuất bản và sẵn sàng gửi tới khách mời.',
     type: 'info',
-    timestamp: '2026-10-14T11:10:00Z',
+    timestamp: '2026-10-15T14:20:00Z',
     read: true,
     link: '/dashboard/events/event-e1/cards',
   },
@@ -832,4 +451,3 @@ export function createInitialMockDb(): MockDb {
     notifications: [...initialNotifications],
   };
 }
-

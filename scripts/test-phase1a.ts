@@ -1,4 +1,4 @@
-import { createInitialMockDb } from '../src/mocks/fixtures';
+import { createTestMockDb } from '../src/mocks/test-fixtures';
 import {
   MockEventRepository,
   MockCardRepository,
@@ -25,7 +25,7 @@ function runTests() {
   console.log('\n=== RUNNING PHASE 1A DOMAIN INVARIANT & ACCEPTANCE TESTS ===\n');
 
   // Setup fresh mock db
-  let db: MockDb = createInitialMockDb();
+  let db: MockDb = createTestMockDb();
   const getDb = () => db;
   const setDb = (fn: (prev: MockDb) => MockDb) => {
     db = fn(db);
